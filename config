@@ -48,6 +48,7 @@ bindsym $mod+space exec rofi -show drun -theme lb
 bindsym $mod+Shift+space exec rofi -show run -theme lb
 bindsym $mod+Ctrl+space exec rofi -show window -theme lb
 
+
 # change focus
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
@@ -58,6 +59,8 @@ bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
+
+bindsym $mod+a focus parent 
 
 # move windows in workspaces
 bindsym $mod+Shift+Left move left
@@ -172,7 +175,7 @@ mode "shutdown"{
 	bindsym $mod+Shift+b exec systemctl reboot, mode "default"
 
 	# Power off computer
-	bindsym $mod+Shift+p exec systemctl shutdown now, mode "default"
+	bindsym $mod+Shift+p exec shutdown now, mode "default"
 
 	# lock the screen
 	bindsym $mod+Shift+l exec i3lock-fancy -p, mode "default"
@@ -220,6 +223,15 @@ bindsym $mod+r mode "Resize Mode"
 
 bindsym XF86ScreenSaver exec xfce4-display-settings
 
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle # mute sound
+
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioStop exec playerctl stop
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
 bindsym $mod+c exec xfce4-settings-manager
 
 # Disable titlebar
@@ -261,7 +273,7 @@ exec compton --opacity-rule '80:window_type = "dock" && class_g = "i3bar"'
 # Hide the mouse pointer if unused for a duration
 exec --no-startup-id /usr/bin/unclutter -b
 
-exec --no-startup-id udisksctl mount -b /dev/sdb1
+exec --no-startup-id udisksctl mount -b /dev/sda1
 
 exec --no-startup-id nm-applet
 
